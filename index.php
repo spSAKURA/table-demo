@@ -28,12 +28,11 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
     <button id="prev">上一页</button>第<span id="page"></span>页<button id="next">下一页</button>
     <table id="table" cellpadding="0" cellspacing="0" width="100%">
         <tr class="title">
-            <td data-field="title" link-to="url">标题</td>
+            <td data-field="title" link-to="url" data-title="cover">标题</td>
             <td data-field="sstype" data-map="type_map">类型</td>
             <td data-field="danmaku" data-order="OFF">弹幕数</td>
             <td data-field="follow" data-order="DESC">订阅</td>
             <td data-field="view" data-order="OFF">播放量</td>
-            <td data-field="cover">封面</td>
         </tr>
     </table>
 </div>
@@ -55,10 +54,17 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
                 $tmp = $template.clone();
                 $tmp.children('td').each(function (index,obj) {
                     var $obj = $(obj);
-                    var field = $obj.attr('data-field');
-                    var value = $obj.attr('data-map')?eval($obj.attr('data-map'))[data[i][field]]:data[i][field];
-                    if($obj.attr('link-to')){
-                        value = '<a target="_blank" href="'+ data[i][$obj.attr('link-to')] +'">' + value + '</a>'
+                    var field = $obj.attr('data-field')?$obj.attr('data-field'):false;
+                    var title = $obj.attr('data-title')?$obj.attr('data-title'):false;
+                    var value = '';
+                    if(field){
+                        value = $obj.attr('data-map')?eval($obj.attr('data-map'))[data[i][field]]:data[i][field];
+                        if($obj.attr('link-to')){
+                            value = '<a target="_blank"  href="'+ data[i][$obj.attr('link-to')] +'">' + value + '</a>'
+                        }
+                    }
+                    if(title){
+                        $obj.attr('title',data[i][title]);
                     }
                     $obj.html(value);
                 });
@@ -102,6 +108,6 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
         page = 0;
         $page.html(page +1);
         loadData();
-    })
+    });
 </script>
 </html>
