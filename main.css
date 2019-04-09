@@ -1,0 +1,77 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+a,a:hover,a:link,a:visited{
+    text-decoration: none;
+    color: #000;
+}
+button{
+    cursor: pointer;
+}
+.title{
+    text-align: center;
+    font-weight: bold;
+    background-color: darkblue;
+    color:#fff;
+}
+.title td{
+    position: relative;
+}
+td[data-field=id],td[data-field=ssid],td[data-field=sstype]{
+    text-align: center;
+}
+.title td[data-order]:hover{
+    cursor: pointer;
+}
+.title td[data-order=DESC]:after,.title td[data-order=ASC]:after,.title td[data-order=OFF]:after{
+    -webkit-transition: width 1s,background-color 1s;
+    -moz-transition: width 1s,background-color 1s;
+    -ms-transition: width 1s,background-color 1s;
+    -o-transition: width 1s,background-color 1s;
+    transition: width 1s,background-color 1s;
+    display: block;
+    position: absolute;
+    font-size: 12px;
+    bottom: 0;
+    left: 0;
+
+}
+.title td[data-order=OFF]:after{
+    content: '';
+    width: 0;
+}
+.title td[data-order=DESC]:after{
+    width: 100%;
+    content: '↓';
+    background-color: #F00;
+}
+.title td[data-order=ASC]:after{
+    width: 100%;
+    content: '↑';
+    background-color: #00F;
+}
+#table tr:last-child  td{
+    border-bottom: 1px solid #000;
+}
+#table td{
+    border-top: 1px solid #000;
+    border-left: 1px solid #000;
+    padding: 3px 5px;
+}
+#table td:last-child{
+    border-right: 1px solid #000;
+}
+#table .line:nth-child(odd){
+    background-color: aqua;
+}
+#table .line:nth-child(even){
+    background-color: aquamarine;
+}
+#table .line:hover{
+    background-color: darkgreen;
+    color: #fff;
+}
+#table .line:hover a{
+    color: #fff;
+}
