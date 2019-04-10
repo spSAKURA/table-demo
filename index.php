@@ -53,10 +53,10 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
             for (var i =0;i<data.length;i++){
                 $tmp = $template.clone();
                 $tmp.children('td').each(function (index,obj) {
-                    var $obj = $(obj);
-                    var field = $obj.attr('data-field')?$obj.attr('data-field'):false;
-                    var attr = $obj.attr('data-attr')?$obj.attr('data-attr'):false;
-                    var value = '';
+                    var $obj = $(obj),
+                        field = $obj.attr('data-field')?$obj.attr('data-field'):false,
+                        attr = $obj.attr('data-attr')?$obj.attr('data-attr'):false,
+                        value = '';
                     if(field){
                         value = $obj.attr('data-map')?data_map[$obj.attr('data-map')][data[i][field]]:data[i][field];
                         if($obj.attr('link-to')){
