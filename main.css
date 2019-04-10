@@ -24,6 +24,9 @@ td[data-field=id],td[data-field=ssid],td[data-field=sstype]{
 .title td[data-order]:hover{
     cursor: pointer;
 }
+[link-to]{
+    cursor: pointer;
+}
 .title td[data-order=DESC]:after,.title td[data-order=ASC]:after,.title td[data-order=OFF]:after{
     -webkit-transition: width 1s,background-color 1s;
     -moz-transition: width 1s,background-color 1s;

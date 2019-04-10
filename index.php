@@ -8,8 +8,7 @@ $type_name_sql = 'SELECT `sstype`,`typename` FROM `type_name`';
 $type_name = $mysqli -> query($type_name_sql) -> fetch_all(1);
 $map = [];
 foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -28,7 +27,7 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
     <button id="prev">上一页</button>第<span id="page"></span>页<button id="next">下一页</button>
     <table id="table" cellpadding="0" cellspacing="0" width="100%">
         <tr class="title">
-            <td data-field="title" link-to="url" data-attr="cover@title">标题</td>
+            <td data-field="title" data-link="url" data-attr="cover@title|url@link-to">标题</td>
             <td data-field="sstype" data-map="type" >类型</td>
             <td data-field="danmaku" data-order="OFF">弹幕数</td>
             <td data-field="follow" data-order="DESC">订阅</td>
@@ -59,9 +58,6 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
                         value = '';
                     if(field){
                         value = $obj.attr('data-map')?data_map[$obj.attr('data-map')][data[i][field]]:data[i][field];
-                        if($obj.attr('link-to')){
-                            value = '<a target="_blank"  href="'+ data[i][$obj.attr('link-to')] +'">' + value + '</a>'
-                        }
                         $obj.html(value);
                     }
                     if(attr){
@@ -70,9 +66,7 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
                             var tmp = attr[j].split('@');
                             $obj.attr(tmp[1],data[i][tmp[0]]);
                         }
-                        console.log(attr);
                     }
-
                 });
                 $table.append($tmp);
             }
@@ -85,7 +79,7 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
         loadData();
     });
     $('#prev').click(function () {
-        if (page<1) page = 1;
+        if (page < 1) page = 1;
         $page.html(--page +1);
         loadData();
     });
@@ -114,6 +108,9 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
         page = 0;
         $page.html(page +1);
         loadData();
+    });
+    $(document).on('click','[link-to]',function () {
+        window.open($(this).attr('link-to'));
     });
 </script>
 </html>
