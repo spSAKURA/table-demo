@@ -12,7 +12,7 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>bilidata</title>
+    <title>table-demo</title>
     <script src="jquery-2.2.0.js"></script>
     <link rel="stylesheet" href="main.css">
 </head>
@@ -25,7 +25,7 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
         <?php } ?>
     </select>
     <button id="prev">上一页</button>第<span id="page"></span>页<button id="next">下一页</button>
-    <input id="keyword" type="text" placeholder="标题搜索"><button id="search" type="button">搜索</button>
+    <input id="keyword" type="text" placeholder="标题搜索"/>
     <table id="table" cellpadding="0" cellspacing="0" width="100%">
         <tr class="title">
             <td data-field="title" data-link="url" data-attr="cover@title|url@link-to">标题</td>
@@ -111,7 +111,7 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
         $page.html(page +1);
         loadData();
     });
-    $(document).on('click','[link-to]',function () {
+    $table.on('click','[link-to]',function () {
         window.open($(this).attr('link-to'));
     });
     var search = function () {
@@ -120,7 +120,7 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
         keyword = $('#keyword').val();
         loadData();
     }
-    $('#search').click(search);
+    $('#keyword').keyup(search);
     $('#keyword').blur(search);
 </script>
 </html>
