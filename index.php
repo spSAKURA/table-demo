@@ -28,8 +28,8 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
     <button id="prev">上一页</button>第<span id="page"></span>页<button id="next">下一页</button>
     <table id="table" cellpadding="0" cellspacing="0" width="100%">
         <tr class="title">
-            <td data-field="title" link-to="url" data-title="cover">标题</td>
-            <td data-field="sstype" data-map="type_map">类型</td>
+            <td data-field="title" link-to="url" data-attr="cover@title">标题</td>
+            <td data-field="sstype" data-map="type" >类型</td>
             <td data-field="danmaku" data-order="OFF">弹幕数</td>
             <td data-field="follow" data-order="DESC">订阅</td>
             <td data-field="view" data-order="OFF">播放量</td>
@@ -38,7 +38,7 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
 </div>
 </body>
 <script>
-    var type_map  = <?php echo json_encode($map) ?>,
+    var data_map  = {type:<?php echo json_encode($map) ?>,};
         sstype    = 0,
         page      = 0,
         data_order = {field:'follow',order:'desc'},
@@ -55,18 +55,24 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
                 $tmp.children('td').each(function (index,obj) {
                     var $obj = $(obj);
                     var field = $obj.attr('data-field')?$obj.attr('data-field'):false;
-                    var title = $obj.attr('data-title')?$obj.attr('data-title'):false;
+                    var attr = $obj.attr('data-attr')?$obj.attr('data-attr'):false;
                     var value = '';
                     if(field){
-                        value = $obj.attr('data-map')?eval($obj.attr('data-map'))[data[i][field]]:data[i][field];
+                        value = $obj.attr('data-map')?data_map[$obj.attr('data-map')][data[i][field]]:data[i][field];
                         if($obj.attr('link-to')){
                             value = '<a target="_blank"  href="'+ data[i][$obj.attr('link-to')] +'">' + value + '</a>'
                         }
+                        $obj.html(value);
                     }
-                    if(title){
-                        $obj.attr('title',data[i][title]);
+                    if(attr){
+                        attr = attr.split('|');
+                        for(var j=0;j<attr.length;j++){
+                            var tmp = attr[j].split('@');
+                            $obj.attr(tmp[1],data[i][tmp[0]]);
+                        }
+                        console.log(attr);
                     }
-                    $obj.html(value);
+
                 });
                 $table.append($tmp);
             }
