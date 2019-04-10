@@ -25,6 +25,7 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
         <?php } ?>
     </select>
     <button id="prev">上一页</button>第<span id="page"></span>页<button id="next">下一页</button>
+    <input id="keyword" type="text" placeholder="标题搜索"><button id="search" type="button">搜索</button>
     <table id="table" cellpadding="0" cellspacing="0" width="100%">
         <tr class="title">
             <td data-field="title" data-link="url" data-attr="cover@title|url@link-to">标题</td>
@@ -37,17 +38,18 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
 </div>
 </body>
 <script>
-    var data_map  = {type:<?php echo json_encode($map) ?>,};
-        sstype    = 0,
-        page      = 0,
+    var data_map   = {type:<?php echo json_encode($map) ?>,};
+        sstype     = 0,
+        page       = 0,
+        keyword    = '',
         data_order = {field:'follow',order:'desc'},
-        $template = $('.title').clone(),
-        $table    = $('#table'),
-        $page     = $('#page');
+        $template  = $('.title').clone(),
+        $table     = $('#table'),
+        $page      = $('#page');
 
     $template.attr('class','line');
     var loadData = function(){
-        $.get('ajax.php',{p:page,sstype:sstype,order:data_order},function (data) {
+        $.get('ajax.php',{p:page,sstype:sstype,order:data_order,keyword:keyword},function (data) {
             $('.line').remove();
             for (var i =0;i<data.length;i++){
                 $tmp = $template.clone();
@@ -112,5 +114,13 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
     $(document).on('click','[link-to]',function () {
         window.open($(this).attr('link-to'));
     });
+    var search = function () {
+        page = 0;
+        $page.html(page+1);
+        keyword = $('#keyword').val();
+        loadData();
+    }
+    $('#search').click(search);
+    $('#keyword').blur(search);
 </script>
 </html>
