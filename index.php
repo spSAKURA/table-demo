@@ -12,6 +12,7 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="referrer" content="never">
     <title>table-demo</title>
     <script src="jquery-2.2.0.js"></script>
     <link rel="stylesheet" href="main.css">
@@ -28,7 +29,7 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
     <input id="keyword" type="text" placeholder="标题搜索"/>
     <table id="table" cellpadding="0" cellspacing="0" width="100%">
         <tr class="title">
-            <td data-field="title" data-link="url" data-attr="cover@title|url@link-to">标题</td>
+            <td data-field="title" data-link="url" data-attr="cover@title   url@link-to">标题</td>
             <td data-field="sstype" data-map="type" >类型</td>
             <td data-field="danmaku" data-order="OFF">弹幕数</td>
             <td data-field="follow" data-order="DESC">订阅</td>
@@ -63,11 +64,13 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
                         $obj.html(value);
                     }
                     if(attr){
-                        attr = attr.split('|');
+                        attr = attr.split(' ');
                         for(var j=0;j<attr.length;j++){
+                            //if(!attr[j]) continue;
                             var tmp = attr[j].split('@');
                             $obj.attr(tmp[1],data[i][tmp[0]]);
                         }
+                        $obj.removeAttr('data-attr');
                     }
                 });
                 $table.append($tmp);
@@ -119,8 +122,27 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
         $page.html(page+1);
         keyword = $('#keyword').val();
         loadData();
-    }
+    };
     $('#keyword').keyup(search);
-    $('#keyword').blur(search);
+    var image = new Image();
+    image.id = 'cover';
+    $img = $(image);
+    $(document).on('mouseenter','.line td[title]' , function () {
+        var src = this.title;
+        $img.attr('src',src);
+        $(this).append($img);
+        image.style.left = $(this).width() +"px";
+        image.style.bottom = '';
+        image.style.height = '';
+        if($img.offset().top + $img.height()  > $(document).scrollTop()+ $(window).height()) {
+            image.style.bottom = 0;
+            if($(document).scrollTop()>$img.offset().top){
+                image.style.height = $img.height()/2 + 'px';
+            }
+        }
+    });
+    $(document).on('mouseleave','.line td[title]' , function () {
+        $img.remove();
+    });
 </script>
 </html>

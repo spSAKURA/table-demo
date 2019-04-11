@@ -9,7 +9,7 @@
 $mysqli = include 'sqlinit.php';
 
 $page = 0;
-$max = 30;
+$max = 100;
 $sstype = 0;
 $where = [];
 

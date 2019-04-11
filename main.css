@@ -78,3 +78,12 @@ td[data-field=id],td[data-field=ssid],td[data-field=sstype]{
 #table .line:hover a{
     color: #fff;
 }
+.line td{
+    position: relative;
+}
+#cover{
+    display: block;
+    position: absolute;
+    z-index: 1000;
+    opacity: .7;
+}
