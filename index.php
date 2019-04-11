@@ -137,7 +137,7 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
         if($img.offset().top + $img.height()  > $(document).scrollTop()+ $(window).height()) {
             image.style.bottom = 0;
             if($(document).scrollTop()>$img.offset().top){
-                image.style.height = $img.height()/2 + 'px';
+                image.style.height = $(this).offset().top - $(document).scrollTop()  + 'px';
             }
         }
     });
