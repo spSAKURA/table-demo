@@ -21,17 +21,20 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
 </head>
 <body>
 <div class="container">
-    <select id="sstype">
-        <option value="0">全部</option>
-        <?php foreach ($sstype as $s){ ?>
-            <option value="<?php echo $s ?>"><?php echo $map[$s] ?></option>
-        <?php } ?>
-    </select>
-    <button id="prev">上一页</button>第<span id="page"></span>页<button id="next">下一页</button>
-    <input id="keyword" type="text" placeholder="标题搜索"/>
+    <div class="control">
+        <select id="sstype">
+            <option value="0">全部</option>
+            <?php foreach ($sstype as $s){ ?>
+                <option value="<?php echo $s ?>"><?php echo $map[$s] ?></option>
+            <?php } ?>
+        </select>
+        <button id="prev">上一页</button>第<span id="page"></span>页<button id="next">下一页</button>
+        <input id="keyword" type="text" placeholder="标题搜索"/>
+    </div>
     <table id="table" cellpadding="0" cellspacing="0" width="100%">
         <tr class="title">
-            <td data-field="title" data-link="url" data-attr="cover@title   url@link-to">标题</td>
+            <td data-row-number="x=>x+1"></td>
+            <td data-field="title" data-link="url" data-attr="url@link-to url@title" data-hover-image="cover">标题</td>
             <td data-field="sstype" data-map="type" >类型</td>
             <td data-field="danmaku" data-order="OFF">弹幕数</td>
             <td data-field="follow" data-order="DESC">订阅</td>

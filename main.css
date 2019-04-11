@@ -1,10 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-}
-a,a:hover,a:link,a:visited{
-    text-decoration: none;
-    color: #000;
+    font-family: Consolas;
 }
 button{
     cursor: pointer;
@@ -12,7 +9,7 @@ button{
 .title{
     text-align: center;
     font-weight: bold;
-    background-color: darkblue;
+    background-color: #55f;
     color:#fff;
 }
 .title td{
@@ -27,17 +24,20 @@ td[data-field=id],td[data-field=ssid],td[data-field=sstype]{
 [link-to]{
     cursor: pointer;
 }
+.title td{
+    width: 10%;
+}
+.title td:nth-child(2){
+    width: 30%;
+}
 .title td[data-order=DESC]:after,.title td[data-order=ASC]:after,.title td[data-order=OFF]:after{
-    -webkit-transition: width 1s,background-color 1s;
-    -moz-transition: width 1s,background-color 1s;
-    -ms-transition: width 1s,background-color 1s;
-    -o-transition: width 1s,background-color 1s;
     transition: width 1s,background-color 1s;
     display: block;
     position: absolute;
     font-size: 12px;
     bottom: 0;
     left: 0;
+    height: 3px;
 
 }
 .title td[data-order=OFF]:after{
@@ -46,33 +46,31 @@ td[data-field=id],td[data-field=ssid],td[data-field=sstype]{
 }
 .title td[data-order=DESC]:after{
     width: 100%;
-    content: '↓';
+    content: '';
     background-color: #F00;
 }
 .title td[data-order=ASC]:after{
     width: 100%;
-    content: '↑';
+    content: '';
     background-color: #00F;
 }
 #table tr:last-child  td{
-    border-bottom: 1px solid #000;
 }
 #table td{
-    border-top: 1px solid #000;
-    border-left: 1px solid #000;
     padding: 3px 5px;
+    border-left: 3px solid #ffaaaa;
 }
-#table td:last-child{
-    border-right: 1px solid #000;
+#table .line:nth-child(odd) td{
+    border-left: 3px solid #ececec;
 }
 #table .line:nth-child(odd){
-    background-color: aqua;
+    background-color: #ffaaaa;
 }
 #table .line:nth-child(even){
-    background-color: aquamarine;
+    background-color: #ececec;
 }
 #table .line:hover{
-    background-color: darkgreen;
+    background-color: #55f;
     color: #fff;
 }
 #table .line:hover a{
@@ -85,5 +83,43 @@ td[data-field=id],td[data-field=ssid],td[data-field=sstype]{
     display: block;
     position: absolute;
     z-index: 1000;
-    opacity: .7;
+    border-radius: 4px;
+}
+.control{
+    text-align: center;
+    margin: 10px 0;
+}
+.control button{
+    padding: 3px 7px;
+    margin: 0 10px;
+    background-color: #55f;
+    border-radius: 3px;
+    border: none;
+    color: #fff;
+}
+.control button:hover{
+    background-color: #aaf;
+    color: #000;
+}
+.control input{
+    outline: none;
+    width: 300px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 3px;
+    outline-color: invert;
+    border: 1px solid #55f;
+    color: #55f;
+}
+.control select{
+    width: 120px;
+    font-size: 15px;
+    line-height: 25px;
+    border-radius: 3px;
+    color: #daa;
+    padding: 3px ;
+    border: 1px solid #daa;
+    outline: none;
 }
