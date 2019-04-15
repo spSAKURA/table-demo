@@ -30,7 +30,7 @@ td[data-field=id],td[data-field=ssid],td[data-field=sstype]{
 .title td[data-row-number].title td[data-row-number-all]{
     width: 2%;
 }
-.title td:nth-child(3){
+.title td[data-field=title]{
     width: 25%;
 }
 .title td[data-order=DESC]:after,.title td[data-order=ASC]:after,.title td[data-order=OFF]:after{
