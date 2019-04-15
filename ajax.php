@@ -12,7 +12,7 @@ $page = 0;
 $max = 20;
 $sstype = 0;
 $where = [];
-//判断是否含有合法请求参数
+//判断是否请求参数是否合法
 if(isset($_REQUEST['p']) && !empty($_REQUEST['p']) && is_numeric($_REQUEST['p']))
     $page = $_REQUEST['p'];
 if(isset($_REQUEST['m']) && !empty($_REQUEST['m']) && is_numeric($_REQUEST['p']))

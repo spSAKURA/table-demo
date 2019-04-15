@@ -22,6 +22,7 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
 <body>
 <div class="container">
     <div class="control">
+        <a href="https://github.com/spSAKURA/table-demo">GitHub</a>
         <select id="sstype">
             <option value="0">全部</option>
             <?php foreach ($sstype as $s){ ?>

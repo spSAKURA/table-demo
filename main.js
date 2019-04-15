@@ -4,11 +4,10 @@ $(function () {
         keyword    = '',
         max_line   = 20,
         data_order = {field:'follow',order:'desc'},
-        $template  = $('.title').clone(),
+        $template  = $('.title').clone().attr('class','line'),
         $table     = $('#table'),
         $page      = $('#page');
 
-    $template.attr('class','line');
     //加载数据的核心方法
     var loadData = function(){
         $.get('ajax.php',{p:page,sstype:sstype,order:data_order,keyword:keyword,m:max_line},function (data) {
@@ -16,12 +15,14 @@ $(function () {
             for (var i =0;i<data.length;i++){
                 $tmp = $template.clone();
                 $tmp.children('td').each(function (index,obj) {
-                    var $obj = $(obj),
-                        field = $obj.attr('data-field')?$obj.attr('data-field'):false,
-                        attr = $obj.attr('data-attr')?$obj.attr('data-attr'):false,
-                        row_number = $obj.attr('data-row-number')?$obj.attr('data-row-number'):false,
+                    //数据格式化处理
+                    //数据初始化
+                    var $obj        = $(obj),
+                        field       = $obj.attr('data-field')?$obj.attr('data-field'):false,
+                        attr        = $obj.attr('data-attr')?$obj.attr('data-attr'):false,
+                        row_number  = $obj.attr('data-row-number')?$obj.attr('data-row-number'):false,
                         hover_image = $obj.attr('data-hover-image')?$obj.attr('data-hover-image'):false,
-                        value = '';
+                        value       = '';
                     //将字段值填入
                     if(field){
                         //检测字段值是否有映射 有映射就替换
@@ -63,6 +64,7 @@ $(function () {
     };
     loadData(page);
     $page.html(page+1);
+    //按钮处事件处理
     $('#next').click(function () {
         $page.html(++page +1);
         loadData();
