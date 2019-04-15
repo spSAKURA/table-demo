@@ -2,6 +2,7 @@ $(function () {
     var sstype     = 0,
         page       = 0,
         keyword    = '',
+        max_line   = 20,
         data_order = {field:'follow',order:'desc'},
         $template  = $('.title').clone(),
         $table     = $('#table'),
@@ -10,7 +11,7 @@ $(function () {
     $template.attr('class','line');
     //加载数据的核心方法
     var loadData = function(){
-        $.get('ajax.php',{p:page,sstype:sstype,order:data_order,keyword:keyword},function (data) {
+        $.get('ajax.php',{p:page,sstype:sstype,order:data_order,keyword:keyword,m:max_line},function (data) {
             $('.line').remove();
             for (var i =0;i<data.length;i++){
                 $tmp = $template.clone();
@@ -40,17 +41,18 @@ $(function () {
                         $obj.removeAttr('data-attr');
                     }
                     //处理行号
-                    if(row_number){
+                    if(row_number) {
                         var r = eval(row_number),
                             type = typeof r,
                             content = '';
-                        if(type == 'function')
+                        if (type == 'function')
                             content = r(i);
                         else
                             content = r;
                         $(this).html(content);
 
                     }
+                    //图片
                     if(hover_image){
                         $(this).attr('data-hover-image',data[i][hover_image]);
                     }
@@ -72,6 +74,12 @@ $(function () {
     });
     $('#sstype').change(function () {
         sstype = this.value;
+        page = 0;
+        $page.html(page +1);
+        loadData();
+    });
+    $('#max').change(function () {
+        max_line = this.value;
         page = 0;
         $page.html(page +1);
         loadData();

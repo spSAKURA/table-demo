@@ -28,6 +28,11 @@ foreach ($type_name as $v) $map[$v['sstype']] = $v['typename'];
                 <option value="<?php echo $s ?>"><?php echo $map[$s] ?></option>
             <?php } ?>
         </select>
+        <select id="max">
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
         <button id="prev">上一页</button>第<span id="page"></span>页<button id="next">下一页</button>
         <input id="keyword" type="text" placeholder="标题搜索"/>
     </div>
